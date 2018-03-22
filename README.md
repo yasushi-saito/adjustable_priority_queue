@@ -1,4 +1,4 @@
-# lp_cockoo_hash
+# intrusive_priority_queue
 
 Efficient intrusive priority queue.
 
