@@ -2,6 +2,8 @@
 
 Efficient intrusive priority queue.
 
+Not yet done.
+
 # Installation
 
 You need a C++-11 compiler. I tested using gcc-4.8/libstdc++ and clang-4.0/libc++.

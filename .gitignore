@@ -32,3 +32,5 @@
 *.app
 CMakeCache.txt
 *~
+/cmake_install.cmake
+/intrusive_priority_queue_test
