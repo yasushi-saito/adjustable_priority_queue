@@ -1,8 +1,10 @@
 # intrusive_priority_queue
 
-Efficient intrusive priority queue.
+An efficient intrusive priority queue.
 
-Not yet done.
+- Based on binary heaps
+- Object lifetime is managed explicitly by the caller
+- Supports in-place rank adjustment
 
 # Installation
 

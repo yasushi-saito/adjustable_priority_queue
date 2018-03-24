@@ -11,17 +11,20 @@
 //
 //   void SetIndex(size_t index, T* e) const;
 //   size_t GetIndex(T* e) const;
-//   bool Less(T* e0, Elem* e1) const;
+//   bool Less(T* e0, T* e1) const;
 //
 // SetIndex is called when "e" is going to be stored in the index'th position in
 // the queue.  The SetIndex implementation must remember the value of index
 // somewhere, so that a future call to GetIndex will return its value.
 //
-// Less should return true if *e0 < *e1. The priority queue will sort elements
-// in the ascending order according to Less.
+// Less must define total ordering, and it must return true iff *e0 < *e1. The
+// priority queue will sort elements in an ascending order, as defined by
+// Less. Ordering of non-comparable elements is unspecified (e0 and e1 are
+// non-comparable if !Less(e0,e1)&&!less(e1,e0)) .
 template <typename T, typename Ops>
 class IntrusivePriorityQueue {
  public:
+  // kInvalidIndex passed to SetIndex when the object is removed from the array.
   static constexpr size_t kInvalidIndex = std::numeric_limits<size_t>::max();
 
   explicit IntrusivePriorityQueue(Ops ops = Ops()) : ops_(std::move(ops)) {}

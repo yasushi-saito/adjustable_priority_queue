@@ -53,7 +53,8 @@ void DoRandomTest(int seed) {
   Q q;
   Model m;
 
-  for (int round = 0; round < 1000; round++) {
+  std::vector<Elem*> to_delete;
+  for (int round = 0; round < 10000; round++) {
     const int op = std::uniform_int_distribution<>(0, 19)(rand);
     if (op < 11) {
       Elem* elem = new Elem;
@@ -64,16 +65,21 @@ void DoRandomTest(int seed) {
       Elem* e0 = q.DeleteMin();
       Elem* e1 = *m.begin();
       m.erase(m.begin());
-      ASSERT_TRUE(e0 == e1);
-      delete e0;
+      ASSERT_EQ(e0->value, e1->value) << round;
+      to_delete.push_back(e0);
+      // Note: its possible that e0 != e1 since ordering of elements with the
+      // same value isn't well defined.
     }
 
     ASSERT_EQ(m.size(), q.Size());
     if (q.Size() > 0) {
       Elem* e0 = q.Min();
       Elem* e1 = *m.begin();
-      ASSERT_TRUE(e0 == e1);
+      ASSERT_EQ(e0->value, e1->value) << round;
     }
+  }
+  for (Elem* it: to_delete) {
+    delete  it;
   }
 }
 
